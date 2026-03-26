@@ -41,7 +41,6 @@
     - x86_64
     - aarch64
     supported_distributions:
-    - SLES
     - CentOS
     - Rocky
     - RedHat
@@ -66,6 +65,10 @@
     allow_kernel_upgrades: true
 
   pre_tasks:
+  - name: Override Facts
+    set_fact:
+      ansible_distribution: "Rocky"
+      ansible_distribution_major_version: 8
   - name: Minimum Ansible Version Check
     assert:
       that: ansible_version.full is version_compare({{min_ansible_version}}, '>=')
